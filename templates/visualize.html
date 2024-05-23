@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sleep Stage Detection</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="container">
+   
+
+   <div class="left-col">
+       <nav>
+          <img src="https://i.postimg.cc/JzKwwG16/arrow.png" class="back-btn">
+
+           <ul>
+               <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('upload') }}"  class="active">Check Now</a></li>
+               <li><a href="{{ url_for('learnmore') }}">Learn More</a></li>
+               <li><a href="{{ url_for('suggestions') }}">Suggestions</a></li>
+               </ul>
+       </nav>
+   </div>
+   <section>
+              <div class="cv visualize-cv">
+           <div class="content">
+            <h1>PPG Signal Visualization</h1>
+    <img src="{{ url_for('static', filename='plot.png') }}" alt="PPG Signal Plot">
+    <h2>Segment Information</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Segment No</th>
+                <th>Cluster</th>
+                <th>Sleep Stage</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for info in segment_info %}
+            <tr>
+                <td>{{ info.segment_no }}</td>
+                <td>{{ info.cluster }}</td>
+                <td>{{ info.sleep_stage }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <h2>Sleep Disorder Classification Report</h2>
+    <img class="pie-chart" src="{{ pie_chart_path }}" alt="Sleep Stages Pie Chart">
+    <h2>Suggestions</h2>
+    <p class="suggestion">{{ suggestions }}</p>
+    <a href="{{ url_for('index') }}">Back to Home</a>
+           </div>
+       </div>
+   </section>
+
+</div>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>

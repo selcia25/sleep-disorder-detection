@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sleep Stage Detection</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        
+/* Mobile First */
+*, *:before, *:after {
+    box-sizing: border-box;
+  }
+  
+  :root {
+    --primary-color: #60e1e1;
+  }
+  
+  body {
+    background: linear-gradient(220deg, rgb(1, 95, 99) 0%, rgb(8, 221, 221) 100%);
+    height: 100vh;
+    background-attachment: fixed;
+    font-family: 'Poppins';
+  }
+  
+  .container {
+    margin: 1em 1em;
+    height: calc(100% - 2em);
+    width: 1800px;
+  }
+  
+  section {
+    background: #221F26 url("https://i.postimg.cc/brwm5rjW/pexels-photo-1679719.webp") no-repeat center center fixed;
+    background-size: cover;
+    background-blend-mode: screen;
+    background-position: 100px;
+    height: 100%;
+    padding: 2em;
+    width: 1000px;
+    border-radius: 13px;
+  }
+  
+  
+  .logo {
+    color: var(--primary-color);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    letter-spacing: -.1em;
+    text-align: center;
+    width: 100%;
+    margin: 0;
+  }
+  
+  header {
+    display: flex;
+  }
+  
+  .menu-btn {
+    cursor: pointer;
+  }
+  
+  h1 {
+    font-size: clamp(1rem, -0.875rem + 5.333vw, 2.2rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    color: white;
+    line-height: 89%;
+  }
+  
+  .cv {
+    display: grid;
+    place-items: center;
+    height: 50%;
+    
+  }
+  
+  .content p {
+    font-size: 40px;
+    font-weight: 300;
+    line-height: 111%;
+    color: #fbf9ff;
+  }
+  
+  .cta {
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: inline-block;
+    border: 1px solid #4D4D4D;
+    padding: 1.25em 1.25em 1.25em calc(2.5em + 1.5em);
+    position: relative;
+  }
+
+
+.cv .content form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+.cv .content a {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #f0ecec;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.cv .content a:hover {
+    color: #adecaf;
+}
+  .cta:before {
+    content: '';
+    position: absolute;
+    background: url("https://i.postimg.cc/JzKwwG16/arrow.png") no-repeat;
+    width: 1.5em;
+    height: 1.5em;
+    left: 1.25em;
+  }
+  
+  .cta:hover {
+    background: var(--primary-color);
+  }
+  
+  nav {
+    position: fixed;
+    z-index: 1;
+    background: #2C2931;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    max-width: 300px;
+    transform: translateX(-100%);
+    transition: transform .3s;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+  }
+  
+  nav ul li {
+    width: 100%;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    padding: .875em 5em .875em 4em;
+  }
+  p.suggestion {
+    font-size: 20px;
+    width: 90%;
+    background-color: rgba(101, 103, 105, 0.5);
+    text-align: center;
+  }
+  nav ul li a:hover {
+    background: #413E47;
+    text-decoration: none;
+    color: white;
+  }
+  .pie-chart{
+    height: 20%;
+  }
+  .back-btn {
+    transform: scaleX(-1);
+    padding: 3em 4em 2em;
+    cursor: pointer;
+    transition: transform .3s;
+  }
+  .back-btn:hover {
+    transform: scaleX(-1) translateX(6px);
+  }
+  
+  .active  {
+    background: var(--primary-color);
+    color: #221F26;
+  }
+  .active:hover  {
+    background: #015064;
+    color: #60e1e1;
+  }
+  
+  
+  /* Responsive */
+  @media only screen and (min-width: 700px) {
+    .left-col {
+        display: flex;
+    }
+  
+    .content p {
+        width: 70%;
+    }
+  }
+  
+  /* Responsive */
+  @media only screen and (min-width: 1000px) {
+    nav {
+        position: unset;
+        transform: translateX(0) !important;
+        border-radius: unset;
+        border-top-left-radius: 13px;
+        border-bottom-left-radius: 13px;
+        height: 100%;
+    }
+  
+    .menu-btn, .back-btn {
+        display: none;
+    }
+  
+    ul {
+        margin-top: 4em;
+    }
+  
+    header {
+        padding: 1.6em;
+    }
+  
+    .container {
+        display: flex;
+        padding: 2em;
+    }
+  
+    .logo {
+        text-align: left;
+    }
+  
+    section {
+        border-radius: unset;
+        border-top-right-radius: 13px;
+        border-bottom-right-radius: 13px;
+        width: 100%;
+        background-size: cover;
+        background-position: 0;
+        background-attachment: unset;
+    }
+  
+    .content {
+        justify-self: left;
+        margin-left: 4em;
+    }
+  }
+
+/* Custom styles for carousel */
+.carousel {
+  margin-top: 1em;
+  width: 92%;
+}
+
+.carousel-item {
+  text-align: center;
+  padding: 1em;
+  border-radius: 10px;
+  background-color: rgba(37, 36, 36, 0.2);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-item img {
+  width: 80%;
+  height: 50%;
+  margin: 0px auto;
+  border-radius: 5px;
+  margin-top: 15px;
+}
+
+.carousel-item h5 {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.carousel-item p {
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 600;
+  text-wrap:pretty;
+  text-align: center;
+  margin-left: -50px;
+  width: 773px;
+  color: #015064;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  color: black;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: black;
+  border-radius: 50%;
+  padding: 0.5em;
+  margin-top: 13em;
+}
+
+.carousel-control-prev-icon {
+  margin-right: 0.5em;
+}
+
+.carousel-control-next-icon {
+  margin-left: 0.5em;
+}
+
+.carousel-indicators {
+  bottom: -20px;
+}
+
+.carousel-indicators li {
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.carousel-indicators .active {
+  background-color: white;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+       <div class="left-col">
+           <nav>
+               <img src="https://i.postimg.cc/JzKwwG16/arrow.png" class="back-btn">
+               <ul>
+                   <li><a href="{{ url_for('index') }}">Home</a></li>
+                   <li><a href="{{ url_for('upload') }}">Check Now</a></li>
+                   <li><a href="{{ url_for('learnmore') }}" class="active">Learn More</a></li>
+                   <li><a href="{{ url_for('suggestions') }} ">Suggestions</a></li>
+                   
+               </ul>
+           </nav>
+       </div>
+       <section>
+           <div class="cv">
+               <div class="content">
+                <h1>DISCOVER HOW WE ANALYZE YOUR SLEEP</h1>
+                   <div id="suggestionsCarousel" class="carousel slide" data-ride="carousel">
+                       <div class="carousel-inner">
+                           <div class="carousel-item active">
+                               <div class="card">
+                                   <img src="{{ url_for('static', filename='hr1.jpeg') }}" class="card-img-top" alt="...">
+                                   <div class="card-body">
+                                       <h5 class="card-title">Step 1: Upload your heart rate signals easily</h5>
+                                       <p class="card-text">Provide your heart rate data in a simple CSV file format.</p>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="carousel-item">
+                               <div class="card">
+                                   <img src="{{ url_for('static', filename='hr2.jpeg') }}" class="card-img-top" alt="...">
+                                   <div class="card-body">
+                                       <h5 class="card-title">Step 2: Ensuring clean and clear data.</h5>
+                                       <p class="card-text">We filter and denoise your heart rate signals for accurate analysis.</p>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="carousel-item">
+                               <div class="card">
+                                   <img src="{{ url_for('static', filename='hr3.jpeg') }}" class="card-img-top" alt="...">
+                                   <div class="card-body">
+                                       <h5 class="card-title">Step 3: Spotting key moments in your heart rate</h5>
+                                       <p class="card-text">Identifying peaks to segment your data precisely.</p>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="carousel-item">
+                            <div class="card">
+                                <img src="{{ url_for('static', filename='hr4.jpeg') }}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Step 4: Breaking down your data for closer inspection.</h5>
+                                    <p class="card-text">Dividing your heart rate signal into manageable 60-second segments.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="card">
+                                <img src="{{ url_for('static', filename='hr5.jpeg') }}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Step 5: Finding patterns and anomalies.</h5>
+                                    <p class="card-text">Using K-Means to cluster data segments and detect trends.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="card">
+                                <img src="{{ url_for('static', filename='hr6.jpeg') }}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Step 6: Understanding your sleep quality.</h5>
+                                    <p class="card-text">Our neural network classifies segments into normal or abnormal sleep stages.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="carousel-item">
+                            <div class="card">
+                                <img src="{{ url_for('static', filename='hr7.jpeg') }}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Step 7: Clear and easy-to-understand results.</h5>
+                                    <p class="card-text">Visualizing the analysis with detailed plots and charts.</p>
+                                </div>
+                            </div>
+                        </div>
+                       
+                           <!-- Add more carousel items here as needed -->
+                       </div>
+                       <a class="carousel-control-prev" href="#suggestionsCarousel" role="button" data-slide="prev">
+                           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                           <span class="sr-only">Previous</span>
+                       </a>
+                       <a class="carousel-control-next" href="#suggestionsCarousel" role="button" data-slide="next">
+                           <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                           <span class="sr-only">Next</span>
+                       </a>
+                   </div>
+                   
+               </div>
+           </div>
+       </section>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    
+    </body>
+    
+</html>
