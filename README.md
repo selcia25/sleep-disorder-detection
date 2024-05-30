@@ -16,7 +16,7 @@ This project aims to develop an automated method for detecting sleep disorders f
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your_username/sleep-disorder-detection.git
+   git clone https://github.com/selcia25/sleep-disorder-detection.git
    ```
 2. Install dependencies:
    ```bash
