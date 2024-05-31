@@ -32,5 +32,13 @@ This project aims to develop an automated method for detecting sleep disorders f
 - View preprocessed data and segmented signals.
 - Receive classification results indicating the presence of sleep disorders.
 
+## Screenshots
+![HomePage](assets/home.png)
+![UploadPage](assets/upload.png)
+![ResultPage](assets/graph.png)
+![ResultPage](assets/segment.png)
+![ResultPage](assets/report.png)
+![ProcessPage](assets/process.png)
+![SuggestionPage](assets/suggestion.png)
 ## License
 This project is licensed under the MIT License - see the LICENSE.md file for details.
